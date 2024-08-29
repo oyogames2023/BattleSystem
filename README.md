@@ -1,5 +1,5 @@
 
-# BattleSystem Library [查看中文版本](README_zh.md)
+# BattleSystem Library - [中文](README_zh.md)
 
 ## Introduction
 
