@@ -1,5 +1,5 @@
 
-# BattleSystem 库 [View English Version](README.md)
+# BattleSystem 库 - [English](README.md)
 
 ## 介绍
 
