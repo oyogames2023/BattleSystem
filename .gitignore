@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Exclude directories
+build
+
+# Exclude files
+.DS_Store
