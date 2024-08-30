@@ -17,8 +17,8 @@ The BattleSystem library is a versatile and powerful C++ library designed to fac
 
 ### Prerequisites
 
-- C++17 compiler or later
-- CMake 3.10 or higher
+- C++20 compiler or later
+- CMake 3.28.3 or higher
 
 ### Building the Library
 
