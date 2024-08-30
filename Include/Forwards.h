@@ -2,7 +2,20 @@
 
 #include "Commom.h"
 
-namespace battle
+namespace zeus
+{
+    struct ObjectGuid;
+    using ObjectGuidPtr = std::shared_ptr<ObjectGuid>;
+
+    class Object;
+    using ObjectPtr = std::shared_ptr<Object>;
+
+    class Actor;
+    using ActorPtr = std::shared_ptr<Actor>;
+
+} // namespace zeus
+
+namespace zeus::battle
 {
 
     class ComponentBase;
@@ -20,4 +33,4 @@ namespace battle
     class BattleComponentBase;
     using BattleComponentBasePtr = std::shared_ptr<BattleComponentBase>;
 
-} // namespace battle
+} // namespace zeus::battle

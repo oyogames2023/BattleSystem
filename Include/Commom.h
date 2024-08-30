@@ -4,6 +4,10 @@
 
 #include <string>
 #include <cstdint>
+#include <iostream>
+#include <strstream>
+#include <fstream>
+#include <filesystem>
 
 #include <map>
 #include <vector>
@@ -21,3 +25,4 @@
 #include <typeinfo>
 #include <functional>
 #include <algorithm>
+#include <cmath>

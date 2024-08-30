@@ -2,7 +2,7 @@
 
 #include "Commom.h"
 
-namespace battle
+namespace zeus::battle
 {
 
     class BATTLE_API ComponentBase
@@ -35,4 +35,4 @@ namespace battle
         uint64_t ownerId_ = 0;
     };
 
-} // namespace battle
+} // namespace zeus::battle

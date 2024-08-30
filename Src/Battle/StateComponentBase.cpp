@@ -1,6 +1,6 @@
 #include "StateComponentBase.h"
 
-namespace battle
+namespace zeus::battle
 {
 
     StateComponentBase::StateComponentBase(const uint64_t ownerId)
@@ -40,4 +40,4 @@ namespace battle
     {
     }
 
-} // namespace battle
+} // namespace zeus::battle

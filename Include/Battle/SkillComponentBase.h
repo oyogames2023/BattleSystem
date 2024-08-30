@@ -2,7 +2,7 @@
 
 #include "ComponentBase.h"
 
-namespace battle
+namespace zeus::battle
 {
 
     class BATTLE_API SkillComponentBase
@@ -33,4 +33,4 @@ namespace battle
         void Detach() override;
     };
 
-} // namespace battle
+} // namespace zeus::battle

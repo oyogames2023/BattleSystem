@@ -2,7 +2,7 @@
 
 #include "Forwards.h"
 
-namespace battle
+namespace zeus::battle
 {
 
     class BATTLE_API BattleComponentBase
@@ -34,4 +34,4 @@ namespace battle
         std::map<uint32_t, ComponentBasePtr> components_;
     };
 
-} // namespace battle
+} // namespace zeus::battle

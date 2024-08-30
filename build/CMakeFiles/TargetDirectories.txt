@@ -1,0 +1,7 @@
+/Volumes/data/github/oyogames/c++/BattleSystem/build/CMakeFiles/BattleSystem.dir
+/Volumes/data/github/oyogames/c++/BattleSystem/build/CMakeFiles/edit_cache.dir
+/Volumes/data/github/oyogames/c++/BattleSystem/build/CMakeFiles/rebuild_cache.dir
+/Volumes/data/github/oyogames/c++/BattleSystem/build/CMakeFiles/list_install_components.dir
+/Volumes/data/github/oyogames/c++/BattleSystem/build/CMakeFiles/install.dir
+/Volumes/data/github/oyogames/c++/BattleSystem/build/CMakeFiles/install/local.dir
+/Volumes/data/github/oyogames/c++/BattleSystem/build/CMakeFiles/install/strip.dir

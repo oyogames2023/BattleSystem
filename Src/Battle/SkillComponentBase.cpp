@@ -1,6 +1,6 @@
 #include "SkillComponentBase.h"
 
-namespace battle
+namespace zeus::battle
 {
 
     SkillComponentBase::SkillComponentBase(const uint64_t ownerId)
@@ -40,4 +40,4 @@ namespace battle
     {
     }
 
-} // namespace battle
+} // namespace zeus::battle

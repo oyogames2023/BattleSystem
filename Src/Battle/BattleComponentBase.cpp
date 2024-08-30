@@ -4,7 +4,7 @@
 #include "DamageComponentBase.h"
 #include "StateComponentBase.h"
 
-namespace battle
+namespace zeus::battle
 {
 
     BattleComponentBase::BattleComponentBase(const uint64_t ownerId)
@@ -53,4 +53,4 @@ namespace battle
         AttachComponent(StateComponentBase::ID, std::make_shared<StateComponentBase>(ownerId_));
     }
 
-} // namespace battle
+} // namespace zeus::battle

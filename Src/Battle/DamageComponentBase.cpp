@@ -1,6 +1,6 @@
 #include "DamageComponentBase.h"
 
-namespace battle
+namespace zeus::battle
 {
 
     DamageComponentBase::DamageComponentBase(const uint64_t ownerId)
@@ -40,4 +40,4 @@ namespace battle
     {
     }
 
-} // namespace battle
+} // namespace zeus::battle
