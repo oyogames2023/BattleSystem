@@ -18,7 +18,7 @@ include_directories(
 add_executable(JSONParserTest main.cpp)
 
 # 确保 BattleSystem 动态库的位置在链接器的搜索路径中
-link_directories(${PROJECT_SOURCE_DIR}/../build)  # 假设动态库位于 build 目录下
+link_directories(${PROJECT_SOURCE_DIR}/../build)
 
 # 链接 jsoncpp 库和 BattleSystem 动态库
 # 假设 jsoncpp_lib 已经在 BattleSystem 中链接，这里可能不需要再次链接

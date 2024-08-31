@@ -38,6 +38,8 @@ target_include_directories(BattleSystem PUBLIC
     Include/Common
     Include/Common/Math
     Include/Common/JSON
+	Include/Common/Logger
+	Include/Common/DateTime
     Include/Object
     Include/Object/Actor
     Include/Object/Player
@@ -67,6 +69,7 @@ endif()
 # 设置编译选项以忽略特定警告
 if(MSVC)
     target_compile_options(BattleSystem PRIVATE /wd4251)
+	target_compile_options(BattleSystem PRIVATE /wd4996)
 endif()
 
 # 链接 spdlog

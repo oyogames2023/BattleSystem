@@ -1,1 +1,3 @@
 add_subdirectory(JSONParserTest)
+add_subdirectory(SingletonTest)
+add_subdirectory(DateTimeTest)
