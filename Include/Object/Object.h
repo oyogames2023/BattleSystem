@@ -6,7 +6,7 @@
 namespace zeus
 {
 
-    class Object
+    class BATTLE_API Object
         : public std::enable_shared_from_this<Object>
     {
     public:

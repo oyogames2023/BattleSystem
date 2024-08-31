@@ -14,6 +14,10 @@ namespace zeus
     {
     }
 
+    Object::~Object()
+    {
+    }
+
     void Object::SetInWorld(const bool isInWorld)
     {
         isInWorld_ = isInWorld;
