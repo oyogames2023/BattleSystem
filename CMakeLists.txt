@@ -7,6 +7,11 @@ project(BattleSystem VERSION 1.0 DESCRIPTION "Battle system library" LANGUAGES C
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# 关闭第三方库的非必要工程
+set(JSONCPP_WITH_TESTS OFF CACHE BOOL "Disable building jsoncpp tests")
+set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF CACHE BOOL "Disable post-build unit tests")
+set(JSONCPP_WITH_EXAMPLES OFF CACHE BOOL "Disable building jsoncpp examples")
+
 # 添加 spdlog 子目录
 add_subdirectory(ThirdParty/spdlog-1.14.1)
 add_subdirectory(ThirdParty/jsoncpp-1.9.5)
@@ -34,6 +39,11 @@ target_include_directories(BattleSystem PUBLIC
     Include/Battle
 )
 
+# 设置编译选项以忽略特定警告
+if(MSVC)
+    target_compile_options(BattleSystem PRIVATE /wd4251)
+endif()
+
 # 链接 spdlog
 target_link_libraries(BattleSystem spdlog jsoncpp_lib)
 
@@ -43,6 +53,10 @@ source_group(TREE "${CMAKE_SOURCE_DIR}/src" PREFIX "Source Files" FILES ${SRC_FI
 
 # 平台特定设置
 if(WIN32)
+	if(USE_BATTLE_EXPORTS AND BATTLE_EXPORTS)
+		add_definitions(-DBATTLE_EXPORTS)
+	endif()
+
     target_compile_definitions(BattleSystem PRIVATE WIN_EXPORT)
     # Windows 平台特有的库（如果有）
 elseif(UNIX AND NOT APPLE)
