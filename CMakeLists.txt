@@ -12,6 +12,9 @@ set(JSONCPP_WITH_TESTS OFF CACHE BOOL "Disable building jsoncpp tests")
 set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF CACHE BOOL "Disable post-build unit tests")
 set(JSONCPP_WITH_EXAMPLES OFF CACHE BOOL "Disable building jsoncpp examples")
 
+# 添加是否编译 Examples 的选项
+option(BUILD_EXAMPLES "Build the examples." OFF)
+
 # 添加 spdlog 子目录
 add_subdirectory(ThirdParty/spdlog-1.14.1)
 add_subdirectory(ThirdParty/jsoncpp-1.9.5)
@@ -29,11 +32,12 @@ add_library(BattleSystem SHARED ${SRC_FILES} ${HEADER_FILES})
 target_include_directories(BattleSystem PUBLIC
     ${CMAKE_SOURCE_DIR}/ThirdParty/spdlog/include
     ${CMAKE_SOURCE_DIR}/ThirdParty/jsoncpp-1.9.5/include
-	${CMAKE_SOURCE_DIR}/ThirdParty/sol2-3.3.0/include/sol
-	${CMAKE_SOURCE_DIR}/ThirdParty/lua-5.4.7/src
+    ${CMAKE_SOURCE_DIR}/ThirdParty/sol2-3.3.0/include/sol
+    ${CMAKE_SOURCE_DIR}/ThirdParty/lua-5.4.7/src
     Include
     Include/Common
     Include/Common/Math
+    Include/Common/JSON
     Include/Object
     Include/Object/Actor
     Include/Object/Player
@@ -42,6 +46,23 @@ target_include_directories(BattleSystem PUBLIC
     Include/Scene
     Include/Battle
 )
+
+# 传递宏定义
+option(USE_BATTLE_EXPORTS "Use BATTLE exports" ON)
+option(BATTLE_EXPORTS "Enable BATTLE API export symbols" ON)
+
+if(USE_BATTLE_EXPORTS)
+    target_compile_definitions(BattleSystem PUBLIC USE_BATTLE_EXPORTS)
+endif()
+
+if(BATTLE_EXPORTS)
+    target_compile_definitions(BattleSystem PUBLIC BATTLE_EXPORTS)
+endif()
+
+# 根据 BUILD_EXAMPLES 选项编译 Examples
+if(BUILD_EXAMPLES)
+    add_subdirectory(Examples)
+endif()
 
 # 设置编译选项以忽略特定警告
 if(MSVC)
@@ -57,10 +78,6 @@ source_group(TREE "${CMAKE_SOURCE_DIR}/src" PREFIX "Source Files" FILES ${SRC_FI
 
 # 平台特定设置
 if(WIN32)
-	if(USE_BATTLE_EXPORTS AND BATTLE_EXPORTS)
-		add_definitions(-DBATTLE_EXPORTS)
-	endif()
-
     target_compile_definitions(BattleSystem PRIVATE WIN_EXPORT)
     # Windows 平台特有的库（如果有）
 elseif(UNIX AND NOT APPLE)
