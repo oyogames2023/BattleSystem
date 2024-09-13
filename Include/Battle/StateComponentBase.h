@@ -31,6 +31,20 @@ namespace zeus::battle
         void Attach() override;
 
         void Detach() override;
+
+    public:
+
+        bool AddForbiddenState(const uint32_t state);
+
+        bool RemoveForbiddenState(const uint32_t state);
+
+        bool HasForbiddenState(const uint32_t state) const;
+
+        bool IsControlled() const;
+
+    private:
+
+        std::set<uint32_t> forbiddenStates_;
     };
 
 } // namespace zeus::battle
