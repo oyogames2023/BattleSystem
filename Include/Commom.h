@@ -31,6 +31,9 @@
 #include <chrono>
 #include <assert.h>
 
+#include "uv.h"
+
+
 #define ASSERT_WITH_LOG(condition, format, ...) \
     do { \
         if (!(condition)) { \

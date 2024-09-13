@@ -3,7 +3,15 @@
 #include "Commom.h"
 #include "Singleton.h"
 #include "BattleConfig.h"
+#include "TimeUtils.h"
+#include "FilesystemUtils.h"
+#include "StringUtils.h"
+#include "Application.h"
+
 #include "spdlog/spdlog.h"
+#include "spdlog/sinks/base_sink.h"
+#include "spdlog/details/file_helper.h"
+#include "spdlog/details/null_mutex.h"
 
 namespace zeus
 {
@@ -59,6 +67,57 @@ namespace zeus
 		bool SeparateByMonth = false;
 
 		bool SeparateByDay = false;
+	};
+
+	template <typename Mutex>
+	class CustomFileSink
+		: public spdlog::sinks::base_sink<Mutex>
+	{
+	public:
+
+		explicit CustomFileSink(const LoggerConfig& cfg)
+			: loggerCfg_(cfg)
+		{
+			UpdateLogFile();
+		}
+
+	private:
+
+		void UpdateLogFile()
+		{
+
+		}
+
+		//std::string BuildLogDirectory()
+		//{
+		//	using fs = std::filesystem;
+		//	
+		//	fs::path logDir = loggerCfg_.LogDir;
+
+		//	if (loggerCfg_.SeparateByYear)
+		//	{
+		//		logDir /= std::to_string(Application::GetInstance().GetYear());
+		//	}
+		//	else if (loggerCfg_.SeparateByMonth)
+		//	{
+		//		logDir /= StringUtils::Format("{}-{}", Application::GetInstance().GetYear(), Application::GetInstance().GetMonth());
+		//	}
+		//	else if (loggerCfg_.SeparateByDay)
+		//	{
+		//		logDir /= StringUtils::Format("{}-{}", Application::GetInstance().GetYear(), Application::GetInstance().GetMonth()
+		//			, Application::GetInstance().GetDay());
+		//	}
+
+		//	return logDir.string();
+		//}
+
+	private:
+
+		LoggerConfig loggerCfg_;
+
+		spdlog::details::file_helper fileHelper_;
+
+		std::chrono::system_clock::time_point nextRotationTimePoint_;
 	};
 
 	class LogManager

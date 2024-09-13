@@ -87,8 +87,15 @@ namespace zeus
 
 		std::ostringstream ss;
 		std::time_t t = std::chrono::system_clock::to_time_t(tp_);
-		std::tm* ptm = std::localtime(&t);
-		ss << std::put_time(ptm, "%Y年%m月%d日 %H:%M:%S");
+		std::tm date;
+
+#if defined(_WIN32) || defined(_WIN64)
+		localtime_s(&date, &t);
+#else
+		localtime_r(&t, &date);
+#endif
+
+		ss << std::put_time(&date, "%Y年%m月%d日 %H:%M:%S");
 
 		return ss.str();
 	}

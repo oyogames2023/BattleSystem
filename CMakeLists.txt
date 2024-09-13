@@ -21,6 +21,7 @@ add_subdirectory(ThirdParty/jsoncpp-1.9.5)
 add_subdirectory(ThirdParty/sol2-3.3.0)
 add_subdirectory(ThirdParty/lua-5.4.7)
 add_subdirectory(ThirdParty/libuv-1.48.0)
+add_subdirectory(ThirdParty/fmt-11.0.2)
 
 # 自动搜索所有 .h 和 .cpp 文件
 file(GLOB_RECURSE HEADER_FILES "${CMAKE_SOURCE_DIR}/include/*.h")
@@ -43,7 +44,10 @@ target_include_directories(BattleSystem PUBLIC
     Include/Common/JSON
 	Include/Common/Logger
 	Include/Common/DateTime
+	Include/Common/Utilities
 	Include/Network
+	Include/Filesystem
+	Include/App
     Include/Object
     Include/Object/Actor
     Include/Object/Player
@@ -77,7 +81,11 @@ if(MSVC)
 endif()
 
 # 链接 spdlog
-target_link_libraries(BattleSystem spdlog jsoncpp_lib lua uv_a)
+target_link_libraries(BattleSystem
+	spdlog
+	jsoncpp_lib
+	lua
+	uv_a)
 
 # 为 Visual Studio 组织源文件
 source_group(TREE "${CMAKE_SOURCE_DIR}/include" PREFIX "Header Files" FILES ${HEADER_FILES})
