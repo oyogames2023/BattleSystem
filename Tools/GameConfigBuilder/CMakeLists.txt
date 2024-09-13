@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)  # 设置 CMake 最小版本要求
 
-project(JSONParserTest)  # 定义项目名称
+project(GameConfigBuilder)  # 定义项目名称
 
 # 设置 C++ 标准
 set(CMAKE_CXX_STANDARD 20)
@@ -12,6 +12,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/../Include/Common
     ${PROJECT_SOURCE_DIR}/../Include/Common/JSON
     ${PROJECT_SOURCE_DIR}/../ThirdParty/jsoncpp-1.9.5/include
+	${PROJECT_SOURCE_DIR}/../ThirdParty/xlnt-1.5.0/include
 )
 
 # 添加要编译的源文件

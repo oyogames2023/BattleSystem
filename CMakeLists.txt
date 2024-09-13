@@ -11,9 +11,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(JSONCPP_WITH_TESTS OFF CACHE BOOL "Disable building jsoncpp tests")
 set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF CACHE BOOL "Disable post-build unit tests")
 set(JSONCPP_WITH_EXAMPLES OFF CACHE BOOL "Disable building jsoncpp examples")
+set(TESTS OFF CACHE BOOL "Disable xlnt tests")
 
-# 添加是否编译 Examples 的选项
+# 编译选项
 option(BUILD_EXAMPLES "Build the examples." OFF)
+option(BUILD_TOOLS "Build the tools." OFF)
 
 # 添加 spdlog 子目录
 add_subdirectory(ThirdParty/spdlog-1.14.1)
@@ -21,6 +23,7 @@ add_subdirectory(ThirdParty/jsoncpp-1.9.5)
 add_subdirectory(ThirdParty/sol2-3.3.0)
 add_subdirectory(ThirdParty/lua-5.4.7)
 add_subdirectory(ThirdParty/libuv-1.48.0)
+add_subdirectory(ThirdParty/xlnt-1.5.0)
 
 # 自动搜索所有 .h 和 .cpp 文件
 file(GLOB_RECURSE HEADER_FILES "${CMAKE_SOURCE_DIR}/include/*.h")
@@ -37,6 +40,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_SOURCE_DIR}/ThirdParty/lua-5.4.7/src
 	${CMAKE_SOURCE_DIR}/ThirdParty/libuv-1.48.0/include
 	${CMAKE_SOURCE_DIR}/ThirdParty/protobuf-28.0/src
+	${CMAKE_SOURCE_DIR}/ThirdParty/xlnt-1.5.0/include
     Include
     Include/Common
     Include/Common/Math
@@ -46,6 +50,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 	Include/Common/Utilities
 	Include/Network
 	Include/Filesystem
+	Include/Excel
 	Include/App
     Include/Object
     Include/Object/Actor
@@ -73,6 +78,11 @@ if(BUILD_EXAMPLES)
     add_subdirectory(Examples)
 endif()
 
+# 根据 BUILD_TOOLS 选项编译 Tools
+if(BUILD_TOOLS)
+    add_subdirectory(Tools)
+endif()
+
 # 设置编译选项以忽略特定警告
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /wd4251)
@@ -84,7 +94,8 @@ target_link_libraries(${PROJECT_NAME}
 	spdlog
 	jsoncpp_lib
 	lua
-	uv_a)
+	uv_a
+	xlnt)
 
 # 为 Visual Studio 组织源文件
 source_group(TREE "${CMAKE_SOURCE_DIR}/include" PREFIX "Header Files" FILES ${HEADER_FILES})
