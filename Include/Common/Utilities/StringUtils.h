@@ -16,6 +16,10 @@ namespace zeus
 		{
 			return spdlog::fmt_lib::format(spdlog::fmt_lib::runtime(formatter), std::forward<Args>(args)...);
 		}
+
+		static std::string ToUpper(const std::string& str);
+
+		static std::string ToLower(const std::string& str);
 	};
 
 } // namespace zeus

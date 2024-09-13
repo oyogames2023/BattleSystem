@@ -19,6 +19,12 @@ namespace zeus
 
 		bool LoadConfig();
 
+		bool Initialize();
+
+		void Destory();
+
+		std::string GetServiceName() const;
+
 	public:
 
 		uint64_t GetCurrentMilliseconds() const;

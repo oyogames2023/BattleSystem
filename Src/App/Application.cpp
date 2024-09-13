@@ -18,6 +18,20 @@ namespace zeus
 		return true;
 	}
 
+	bool ApplicationBase::Initialize()
+	{
+		return false;
+	}
+
+	void ApplicationBase::Destory()
+	{
+	}
+
+	std::string ApplicationBase::GetServiceName() const
+	{
+		return serviceName_;
+	}
+
 	uint64_t ApplicationBase::GetCurrentMilliseconds() const
 	{
 		return dt_.GetCurrentMilliseconds();
