@@ -27,10 +27,10 @@ file(GLOB_RECURSE HEADER_FILES "${CMAKE_SOURCE_DIR}/include/*.h")
 file(GLOB_RECURSE SRC_FILES "${CMAKE_SOURCE_DIR}/src/*.cpp")
 
 # 添加库
-add_library(BattleSystem SHARED ${SRC_FILES} ${HEADER_FILES})
+add_library(${PROJECT_NAME} SHARED ${SRC_FILES} ${HEADER_FILES})
 
 # 包含目录
-target_include_directories(BattleSystem PUBLIC
+target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_SOURCE_DIR}/ThirdParty/spdlog/include
     ${CMAKE_SOURCE_DIR}/ThirdParty/jsoncpp-1.9.5/include
     ${CMAKE_SOURCE_DIR}/ThirdParty/sol2-3.3.0/include/sol
@@ -61,11 +61,11 @@ option(USE_BATTLE_EXPORTS "Use BATTLE exports" ON)
 option(BATTLE_EXPORTS "Enable BATTLE API export symbols" ON)
 
 if(USE_BATTLE_EXPORTS)
-    target_compile_definitions(BattleSystem PUBLIC USE_BATTLE_EXPORTS)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC USE_BATTLE_EXPORTS)
 endif()
 
 if(BATTLE_EXPORTS)
-    target_compile_definitions(BattleSystem PUBLIC BATTLE_EXPORTS)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC BATTLE_EXPORTS)
 endif()
 
 # 根据 BUILD_EXAMPLES 选项编译 Examples
@@ -75,12 +75,12 @@ endif()
 
 # 设置编译选项以忽略特定警告
 if(MSVC)
-    target_compile_options(BattleSystem PRIVATE /wd4251)
-	target_compile_options(BattleSystem PRIVATE /wd4996)
+    target_compile_options(${PROJECT_NAME} PRIVATE /wd4251)
+	target_compile_options(${PROJECT_NAME} PRIVATE /wd4996)
 endif()
 
 # 链接 spdlog
-target_link_libraries(BattleSystem
+target_link_libraries(${PROJECT_NAME}
 	spdlog
 	jsoncpp_lib
 	lua
@@ -92,14 +92,14 @@ source_group(TREE "${CMAKE_SOURCE_DIR}/src" PREFIX "Source Files" FILES ${SRC_FI
 
 # 平台特定设置
 if(WIN32)
-    target_compile_definitions(BattleSystem PRIVATE WIN_EXPORT)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE WIN_EXPORT)
     # Windows 平台特有的库（如果有）
 elseif(UNIX AND NOT APPLE)
-    target_link_libraries(BattleSystem pthread)  # 例如链接 pthread
+    target_link_libraries(${PROJECT_NAME} pthread)  # 例如链接 pthread
 endif()
 
 # 安装规则
-install(TARGETS BattleSystem
+install(TARGETS ${PROJECT_NAME}
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib
         RUNTIME DESTINATION bin)
