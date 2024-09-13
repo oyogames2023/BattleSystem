@@ -21,7 +21,6 @@ add_subdirectory(ThirdParty/jsoncpp-1.9.5)
 add_subdirectory(ThirdParty/sol2-3.3.0)
 add_subdirectory(ThirdParty/lua-5.4.7)
 add_subdirectory(ThirdParty/libuv-1.48.0)
-add_subdirectory(ThirdParty/fmt-11.0.2)
 
 # 自动搜索所有 .h 和 .cpp 文件
 file(GLOB_RECURSE HEADER_FILES "${CMAKE_SOURCE_DIR}/include/*.h")
