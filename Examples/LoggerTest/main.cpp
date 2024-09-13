@@ -12,8 +12,8 @@ int main(int argc, char* argv[])
 	for (;;)
 	{
 		LOG_TRACE("XXGames", "This is a test.");
-		auto duration = std::chrono::seconds(1);
-		std::this_thread::sleep_for(duration);
+		//auto duration = std::chrono::seconds(1);
+		//std::this_thread::sleep_for(duration);
 	}
 
 	//LOG_TRACE("XXGames", "This is a test1.");
