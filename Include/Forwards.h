@@ -31,6 +31,11 @@ namespace zeus
     class DateTime;
     using DateTimePtr = std::shared_ptr<DateTime>;
 
+    class ExcelParser;
+    using ExcelParserPtr = std::shared_ptr<ExcelParser>;
+
+    class GameConfigGenerator;
+    using GameConfigGeneratorPtr = std::shared_ptr<GameConfigGenerator>;
 
 } // namespace zeus
 

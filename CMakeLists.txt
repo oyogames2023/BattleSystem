@@ -48,9 +48,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 	Include/Common/Logger
 	Include/Common/DateTime
 	Include/Common/Utilities
+	Include/Common/GameConfig
 	Include/Network
 	Include/Filesystem
-	Include/Excel
 	Include/App
     Include/Object
     Include/Object/Actor
