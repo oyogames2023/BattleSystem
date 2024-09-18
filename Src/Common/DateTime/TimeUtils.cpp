@@ -71,6 +71,7 @@ namespace zeus
 
 	std::tm TimeUtils::ToTime(const std::chrono::system_clock::time_point& tp)
 	{
+		/*
 		auto zt = std::chrono::zoned_time(std::chrono::current_zone(), tp);
 		auto ldp = zt.get_local_time();
 		auto dp = std::chrono::floor<std::chrono::days>(ldp);
@@ -84,6 +85,9 @@ namespace zeus
 		tm.tm_hour = tt.hours().count();
 		tm.tm_min = tt.minutes().count();
 		tm.tm_sec = static_cast<int>(tt.seconds().count());
+		*/
+		auto time_t_c = std::chrono::system_clock::to_time_t(tp);
+		std::tm tm = *std::localtime(&time_t_c);
 
 		return tm;
 	}
