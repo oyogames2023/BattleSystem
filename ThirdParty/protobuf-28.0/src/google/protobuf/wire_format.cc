@@ -11,10 +11,14 @@
 
 #include "google/protobuf/wire_format.h"
 
-#include <stack>
+#include <algorithm>
+#include <cstddef>
+#include <cstdint>
 #include <string>
+#include <utility>
 #include <vector>
 
+#include "absl/base/attributes.h"
 #include "absl/log/absl_check.h"
 #include "absl/log/absl_log.h"
 #include "absl/strings/cord.h"
@@ -22,14 +26,12 @@
 #include "google/protobuf/descriptor.pb.h"
 #include "google/protobuf/dynamic_message.h"
 #include "google/protobuf/io/coded_stream.h"
-#include "google/protobuf/io/zero_copy_stream.h"
-#include "google/protobuf/io/zero_copy_stream_impl.h"
 #include "google/protobuf/map_field.h"
-#include "google/protobuf/map_field_inl.h"
 #include "google/protobuf/message.h"
 #include "google/protobuf/message_lite.h"
 #include "google/protobuf/parse_context.h"
 #include "google/protobuf/unknown_field_set.h"
+#include "google/protobuf/wire_format_lite.h"
 
 
 // Must be included last.
@@ -544,12 +546,12 @@ bool WireFormat::ParseAndMergeField(
         if (strict_utf8_check) {
           if (!WireFormatLite::VerifyUtf8String(value.data(), value.length(),
                                                 WireFormatLite::PARSE,
-                                                field->full_name().c_str())) {
+                                                field->full_name())) {
             return false;
           }
         } else {
           VerifyUTF8StringNamedField(value.data(), value.length(), PARSE,
-                                     field->full_name().c_str());
+                                     field->full_name());
         }
         if (field->is_repeated()) {
           message_reflection->AddString(message, field, value);
@@ -1017,12 +1019,12 @@ const char* WireFormat::_InternalParseAndMergeField(
         if (strict_utf8_check) {
           if (!WireFormatLite::VerifyUtf8String(value.data(), value.length(),
                                                 WireFormatLite::PARSE,
-                                                field->full_name().c_str())) {
+                                                field->full_name())) {
             return nullptr;
           }
         } else {
           VerifyUTF8StringNamedField(value.data(), value.length(), PARSE,
-                                     field->full_name().c_str());
+                                     field->full_name());
         }
       }
       if (field->is_repeated()) {
@@ -1415,10 +1417,10 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
         if (strict_utf8_check) {
           WireFormatLite::VerifyUtf8String(value.data(), value.length(),
                                            WireFormatLite::SERIALIZE,
-                                           field->full_name().c_str());
+                                           field->full_name());
         } else {
           VerifyUTF8StringNamedField(value.data(), value.length(), SERIALIZE,
-                                     field->full_name().c_str());
+                                     field->full_name());
         }
         target = stream->WriteString(field->number(), value, target);
         break;

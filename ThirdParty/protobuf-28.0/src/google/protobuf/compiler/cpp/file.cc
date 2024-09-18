@@ -236,7 +236,8 @@ void FileGenerator::GenerateSharedHeaderCode(io::Printer* p) {
              NamespaceOpener ns(ProtobufNamespace(options_), p);
              p->Emit(R"cc(
                namespace internal {
-               class AnyMetadata;
+               template <typename T>
+               ::absl::string_view GetAnyMessageName();
                }  // namespace internal
              )cc");
            }},
@@ -489,6 +490,7 @@ void FileGenerator::GenerateSourceIncludes(io::Printer* p) {
   IncludeFile("third_party/protobuf/generated_message_tctable_impl.h", p);
   // TODO This is to include parse_context.h, we need a better way
   IncludeFile("third_party/protobuf/extension_set.h", p);
+  IncludeFile("third_party/protobuf/generated_message_util.h", p);
   IncludeFile("third_party/protobuf/wire_format_lite.h", p);
 
   if (ShouldVerify(file_, options_, &scc_analyzer_)) {

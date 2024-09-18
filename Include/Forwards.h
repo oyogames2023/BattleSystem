@@ -37,6 +37,12 @@ namespace zeus
     class GameConfigGenerator;
     using GameConfigGeneratorPtr = std::shared_ptr<GameConfigGenerator>;
 
+    struct ProtoDefineInfo;
+    using ProtoDefineInfoPtr = std::shared_ptr< ProtoDefineInfo>;
+
+    struct EnumerationDefineInfo;
+    using EnumerationDefineInfoPtr = std::shared_ptr<EnumerationDefineInfo>;
+
 } // namespace zeus
 
 namespace zeus::battle

@@ -11,11 +11,11 @@
 
 #include "google/protobuf/extension_set.h"
 
+#include <algorithm>
 #include <cstdint>
 #include <string>
 
 #include "google/protobuf/descriptor.pb.h"
-#include "google/protobuf/testing/googletest.h"
 #include <gtest/gtest.h>
 #include "absl/base/casts.h"
 #include "absl/strings/cord.h"
@@ -27,12 +27,13 @@
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/io/zero_copy_stream_impl.h"
 #include "google/protobuf/message_lite.h"
+#include "google/protobuf/port.h"
 #include "google/protobuf/test_util.h"
 #include "google/protobuf/test_util2.h"
 #include "google/protobuf/text_format.h"
 #include "google/protobuf/unittest.pb.h"
-#include "google/protobuf/unittest.pb.h"
 #include "google/protobuf/unittest_mset.pb.h"
+#include "google/protobuf/unittest_mset_wire_format.pb.h"
 #include "google/protobuf/unittest_proto3_extensions.pb.h"
 #include "google/protobuf/wire_format.h"
 #include "google/protobuf/wire_format_lite.h"
@@ -841,10 +842,12 @@ TEST(ExtensionSetTest, SpaceUsedExcludingSelf) {
     const size_t old_capacity =                                                \
         message->GetRepeatedExtension(unittest::repeated_##type##_extension)   \
             .Capacity();                                                       \
-    EXPECT_GE(                                                                 \
-        old_capacity,                                                          \
-        (RepeatedFieldLowerClampLimit<cpptype, std::max(sizeof(cpptype),       \
-                                                        sizeof(void*))>()));   \
+    if (sizeof(cpptype) > 1) {                                                 \
+      EXPECT_GE(                                                               \
+          old_capacity,                                                        \
+          (RepeatedFieldLowerClampLimit<cpptype, std::max(sizeof(cpptype),     \
+                                                          sizeof(void*))>())); \
+    }                                                                          \
     for (int i = 0; i < 16; ++i) {                                             \
       message->AddExtension(unittest::repeated_##type##_extension, value);     \
     }                                                                          \

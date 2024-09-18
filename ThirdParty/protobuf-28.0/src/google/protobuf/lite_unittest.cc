@@ -12,6 +12,7 @@
 #include <iostream>
 #include <limits>
 #include <string>
+#include <type_traits>
 #include <utility>
 
 #include <gmock/gmock.h>
@@ -32,6 +33,7 @@
 #include "google/protobuf/test_util_lite.h"
 #include "google/protobuf/unittest_lite.pb.h"
 #include "google/protobuf/wire_format_lite.h"
+
 
 // Must be included last
 #include "google/protobuf/port_def.inc"
@@ -1164,6 +1166,7 @@ TYPED_TEST(LiteTest, EnumValueToName) {
   EXPECT_EQ("", protobuf_unittest::ForeignEnumLite_Name(999));
 }
 
+
 TYPED_TEST(LiteTest, NestedEnumValueToName) {
   EXPECT_EQ("FOO", protobuf_unittest::TestAllTypesLite::NestedEnum_Name(
                        protobuf_unittest::TestAllTypesLite::FOO));
@@ -1360,9 +1363,10 @@ TEST(LiteTest, DynamicCastMessage) {
 TEST(LiteTest, DynamicCastMessageInvalidReferenceType) {
   CastType1 test_type_1;
   const MessageLite& test_type_1_pointer_const_ref = test_type_1;
-  ASSERT_DEATH(DynamicCastMessage<CastType2>(test_type_1_pointer_const_ref),
-               "Cannot downcast " + test_type_1.GetTypeName() + " to " +
-                   CastType2::default_instance().GetTypeName());
+  ASSERT_DEATH(
+      DynamicCastMessage<CastType2>(test_type_1_pointer_const_ref),
+      absl::StrCat("Cannot downcast ", test_type_1.GetTypeName(), " to ",
+                   CastType2::default_instance().GetTypeName()));
 }
 #endif  // GTEST_HAS_DEATH_TEST
 
@@ -1393,9 +1397,10 @@ TEST(LiteTest, DownCastMessageInvalidPointerType) {
 
   MessageLite* test_type_1_pointer = &test_type_1;
 
-  ASSERT_DEBUG_DEATH(DownCastMessage<CastType2>(test_type_1_pointer),
-                     "Cannot downcast " + test_type_1.GetTypeName() + " to " +
-                         CastType2::default_instance().GetTypeName());
+  ASSERT_DEBUG_DEATH(
+      DownCastMessage<CastType2>(test_type_1_pointer),
+      absl::StrCat("Cannot downcast ", test_type_1.GetTypeName(), " to ",
+                   CastType2::default_instance().GetTypeName()));
 }
 
 TEST(LiteTest, DownCastMessageInvalidReferenceType) {
@@ -1403,9 +1408,10 @@ TEST(LiteTest, DownCastMessageInvalidReferenceType) {
 
   MessageLite& test_type_1_pointer = test_type_1;
 
-  ASSERT_DEBUG_DEATH(DownCastMessage<CastType2>(test_type_1_pointer),
-                     "Cannot downcast " + test_type_1.GetTypeName() + " to " +
-                         CastType2::default_instance().GetTypeName());
+  ASSERT_DEBUG_DEATH(
+      DownCastMessage<CastType2>(test_type_1_pointer),
+      absl::StrCat("Cannot downcast ", test_type_1.GetTypeName(), " to ",
+                   CastType2::default_instance().GetTypeName()));
 }
 #endif  // GTEST_HAS_DEATH_TEST
 

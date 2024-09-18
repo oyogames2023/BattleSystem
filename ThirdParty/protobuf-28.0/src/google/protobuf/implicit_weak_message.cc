@@ -69,9 +69,10 @@ constexpr MessageLite::ClassDataLite<1> ImplicitWeakMessage::class_data_ = {
         nullptr,  // on_demand_register_arena_dtor
         nullptr,  // is_initialized (always true)
         MergeImpl,
-        GetDeleteImpl<ImplicitWeakMessage>(),
-        GetNewImpl<ImplicitWeakMessage>(),
-        &ClearImpl,
+        internal::MessageCreator(NewImpl<ImplicitWeakMessage>,
+                                 sizeof(ImplicitWeakMessage)),
+        &DestroyImpl,
+        GetClearImpl<ImplicitWeakMessage>(),
         &ByteSizeLongImpl,
         &_InternalSerializeImpl,
         PROTOBUF_FIELD_OFFSET(ImplicitWeakMessage, cached_size_),

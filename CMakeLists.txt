@@ -12,6 +12,8 @@ set(JSONCPP_WITH_TESTS OFF CACHE BOOL "Disable building jsoncpp tests")
 set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF CACHE BOOL "Disable post-build unit tests")
 set(JSONCPP_WITH_EXAMPLES OFF CACHE BOOL "Disable building jsoncpp examples")
 set(TESTS OFF CACHE BOOL "Disable xlnt tests")
+set(ZLIB_BUILD_EXAMPLES OFF CACHE BOOL "Disable zlib examples")
+set(protobuf_BUILD_TESTS OFF CACHE BOOL "Disable protobuf's google test")
 
 # 编译选项
 option(BUILD_EXAMPLES "Build the examples." OFF)
@@ -24,6 +26,8 @@ add_subdirectory(ThirdParty/sol2-3.3.0)
 add_subdirectory(ThirdParty/lua-5.4.7)
 add_subdirectory(ThirdParty/libuv-1.48.0)
 add_subdirectory(ThirdParty/xlnt-1.5.0)
+add_subdirectory(ThirdParty/zlib-1.3.1)
+add_subdirectory(ThirdParty/protobuf-28.0)
 
 # 自动搜索所有 .h 和 .cpp 文件
 file(GLOB_RECURSE HEADER_FILES "${CMAKE_SOURCE_DIR}/include/*.h")
@@ -41,6 +45,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 	${CMAKE_SOURCE_DIR}/ThirdParty/libuv-1.48.0/include
 	${CMAKE_SOURCE_DIR}/ThirdParty/protobuf-28.0/src
 	${CMAKE_SOURCE_DIR}/ThirdParty/xlnt-1.5.0/include
+	${CMAKE_SOURCE_DIR}/ThirdParty/zlib-1.3.1
+	${CMAKE_SOURCE_DIR}/ThirdParty/protobuf-28.0/src
     Include
     Include/Common
     Include/Common/Math
@@ -95,7 +101,9 @@ target_link_libraries(${PROJECT_NAME}
 	jsoncpp_lib
 	lua
 	uv_a
-	xlnt)
+	xlnt
+	zlib
+	libprotobuf)
 
 # 为 Visual Studio 组织源文件
 source_group(TREE "${CMAKE_SOURCE_DIR}/include" PREFIX "Header Files" FILES ${HEADER_FILES})

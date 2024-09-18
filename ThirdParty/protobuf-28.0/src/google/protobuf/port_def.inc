@@ -143,6 +143,21 @@ static_assert(PROTOBUF_ABSL_MIN(20230125, 3),
 // Owner: shaod@, gberg@
 #define PROTOBUF_FUTURE_DESCRIPTOR_EXTENSION_DECL 1
 
+// Removes Arena::CreateMessage, as Arena::Create is equivalent
+// Owner: ckennelly@, mkruskal@
+#define PROTOBUF_FUTURE_REMOVE_CREATEMESSAGE 1
+
+// Renames DescriptorPool::AddUnusedImportTrackFile
+// Owner: mkruskal@
+#define PROTOBUF_FUTURE_RENAME_ADD_UNUSED_IMPORT 1
+
+#endif
+
+#ifdef PROTOBUF_FUTURE_STRING_VIEW_RETURN_TYPE
+#error PROTOBUF_FUTURE_STRING_VIEW_RETURN_TYPE was previously defined
+#endif
+#if defined(PROTOBUF_TEMPORARY_ENABLE_STRING_VIEW_RETURN_TYPE)
+#define PROTOBUF_FUTURE_STRING_VIEW_RETURN_TYPE 1
 #endif
 
 #ifdef PROTOBUF_MINIMUM_EDITION
@@ -383,26 +398,8 @@ static_assert(PROTOBUF_ABSL_MIN(20230125, 3),
 #define PROTOBUF_RESTRICT
 #endif
 
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-#error PROTOBUF_FORCE_COPY_IN_RELEASE was previously defined
-#endif
-
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-#error PROTOBUF_FORCE_COPY_IN_SWAP was previously defined
-#endif
-
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-#error PROTOBUF_FORCE_COPY_IN_MOVE was previously defined
-#endif
-
 #ifdef PROTOBUF_FUZZ_MESSAGE_SPACE_USED_LONG
 #error PROTOBUF_FUZZ_MESSAGE_SPACE_USED_LONG was previously defined
-#endif
-
-// Force copy the default string to a string field so that non-optimized builds
-// have harder-to-rely-on address stability.
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-#error PROTOBUF_FORCE_COPY_DEFAULT_STRING was previously defined
 #endif
 
 #ifdef PROTOBUF_FORCE_ALLOCATION_ON_CONSTRUCTION

@@ -17,6 +17,8 @@ namespace zeus
 
 		bool Load(const fs::path& path);
 
+		bool Reload();
+
 		const fs::path GetPath() const;
 
 		size_t GetRowCount() const;
@@ -42,7 +44,18 @@ namespace zeus
 	{
 	public:
 
-		bool GenerateProto(const ExcelParser& parser);
+		enum class ERowInfo : uint32_t
+		{
+			FieldName, // 字段名称
+			DataType, // 数据类型
+			ExportMode, // 导出方式
+			FieldComment, // 字段描述
+			InvalidMaxRows, // 有效数据行数
+		};
+
+	public:
+
+		bool GenerateProto(const ExcelParserPtr parser);
 	};
 
 } // namespace zeus

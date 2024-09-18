@@ -9,14 +9,19 @@
 
 #import <objc/runtime.h>
 
+#import "GPBArray.h"
 #import "GPBArray_PackagePrivate.h"
+#import "GPBDescriptor.h"
 #import "GPBDescriptor_PackagePrivate.h"
+#import "GPBDictionary.h"
 #import "GPBDictionary_PackagePrivate.h"
+#import "GPBMessage.h"
 #import "GPBMessage_PackagePrivate.h"
 #import "GPBUnknownField.h"
 #import "GPBUnknownFieldSet.h"
 #import "GPBUnknownField_PackagePrivate.h"
 #import "GPBUnknownFields.h"
+#import "GPBUtilities.h"
 #import "GPBUtilities_PackagePrivate.h"
 
 // Direct access is use for speed, to avoid even internally declaring things
@@ -206,6 +211,14 @@ void GPBCheckRuntimeVersionSupport(int32_t objcRuntimeVersion) {
                        @" supports back to %d!",
                        objcRuntimeVersion, GOOGLE_PROTOBUF_OBJC_MIN_SUPPORTED_VERSION];
   }
+#if defined(DEBUG) && DEBUG
+  if (objcRuntimeVersion < GOOGLE_PROTOBUF_OBJC_VERSION) {
+    // This is a version we haven't generated for yet.
+    NSLog(@"WARNING: Code from generated Objective-C proto from an older version of the library is "
+          @"being used. Please regenerate with the current version as the code will stop working "
+          @"in a future release.");
+  }
+#endif
 }
 
 void GPBRuntimeMatchFailure(void) {

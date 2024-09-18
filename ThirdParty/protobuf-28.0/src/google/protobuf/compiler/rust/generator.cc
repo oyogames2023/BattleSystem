@@ -177,6 +177,7 @@ bool RustGenerator::Generate(const FileDescriptor* file,
       {"Phantom", "::__std::marker::PhantomData"},
   });
 
+
   ctx.Emit({{"kernel", KernelRsName(ctx.opts().kernel)}}, R"rs(
     extern crate protobuf_$kernel$ as __pb;
     extern crate std as __std;
@@ -205,6 +206,11 @@ bool RustGenerator::Generate(const FileDescriptor* file,
          {"proto_deps_h",
           [&] {
             for (int i = 0; i < file->dependency_count(); i++) {
+              if (opts->strip_nonfunctional_codegen &&
+                  IsKnownFeatureProto(file->dependency(i)->name())) {
+                // Strip feature imports for editions codegen tests.
+                continue;
+              }
               thunks_printer->Emit(
                   {{"proto_dep_h", GetHeaderFile(ctx, *file->dependency(i))}},
                   R"cc(
@@ -252,7 +258,6 @@ bool RustGenerator::Generate(const FileDescriptor* file,
       thunks_ctx.Emit({{"enum", enum_.full_name()}}, R"cc(
         // $enum$
       )cc");
-      GenerateEnumThunksCc(thunks_ctx, enum_);
       thunks_ctx.printer().PrintRaw("\n");
     }
   }

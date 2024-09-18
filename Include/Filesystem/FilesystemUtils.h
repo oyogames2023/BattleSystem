@@ -19,6 +19,11 @@ namespace zeus
 		static bool IsDirectory(const fs::path& path);
 
 		static std::pair<std::string, std::string> GetFilenameAndExtension(const fs::path& path);
+
+		static std::string GetFullFilename(const fs::path& path);
+
+		static void GetFileList(const std::vector<fs::path>& paths, const std::vector<std::string>& extensions
+			, std::map<std::string, std::vector<fs::path>>& outputFileList);
 	};
 
 } // namespace zeus

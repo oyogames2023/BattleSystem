@@ -13,12 +13,17 @@ namespace zeus
 			return false;
 		}
 
+		path_ = path;
+		return Reload();
+	}
+
+	bool ExcelParser::Reload()
+	{
 		try
 		{
-			path_ = path;
 			rows_.clear();
 			xlnt::workbook wb;
-			wb.load(path);
+			wb.load(path_);
 			const auto ws = wb.active_sheet();
 
 			for (const auto& row : ws.rows())
@@ -78,8 +83,20 @@ namespace zeus
 		return rows_[row][col];
 	}
 
-	bool GameConfigGenerator::GenerateProto(const ExcelParser& parser)
+	bool GameConfigGenerator::GenerateProto(const ExcelParserPtr parser)
 	{
+		if (nullptr == parser)
+		{
+			return false;
+		}
+		const size_t invalidMaxRows = static_cast<size_t>(ERowInfo::InvalidMaxRows);
+		if (invalidMaxRows > parser->GetRowCount())
+		{
+			return false;
+		}
+		const std::string fullFilename = FilesystemUtils::GetFullFilename(parser->GetPath());
+		auto filenameAndExtension = FilesystemUtils::GetFilenameAndExtension(fullFilename);
+
 		return true;
 	}
 
