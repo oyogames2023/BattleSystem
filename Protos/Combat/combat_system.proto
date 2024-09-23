@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package combat;
+
+import "common/entities.proto";
+
+// 定义战斗事件
+message CombatEvent {
+    repeated common.Entity participants = 1; // 参与战斗的实体列表
+    int32 eventId = 2;                       // 事件的唯一标识符
+}

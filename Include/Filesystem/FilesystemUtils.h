@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Commom.h"
+#include "Common.h"
 #include "BattleConfig.h"
 
 namespace zeus
@@ -24,6 +24,8 @@ namespace zeus
 
 		static void GetFileList(const std::vector<fs::path>& paths, const std::vector<std::string>& extensions
 			, std::map<std::string, std::vector<fs::path>>& outputFileList);
+
+		static fs::path GetParentDirectory(const fs::path& path);
 	};
 
 } // namespace zeus

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Commom.h"
+#include "Common.h"
 #include "BattleConfig.h"
 
 namespace zeus

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Commom.h"
+#include "Common.h"
 
 namespace zeus
 {
@@ -31,14 +31,23 @@ namespace zeus
     class DateTime;
     using DateTimePtr = std::shared_ptr<DateTime>;
 
+    class ExcelWorksheet;
+    using ExcelWorksheetPtr = std::shared_ptr<ExcelWorksheet>;
+
     class ExcelParser;
     using ExcelParserPtr = std::shared_ptr<ExcelParser>;
+
+	class ProtoParser;
+	using ProtoParserPtr = std::shared_ptr<ProtoParser>;
+
+    class ProtoGenerator;
+    using ProtoGeneratorPtr = std::shared_ptr<ProtoGenerator>;
 
     class GameConfigGenerator;
     using GameConfigGeneratorPtr = std::shared_ptr<GameConfigGenerator>;
 
-    struct ProtoDefineInfo;
-    using ProtoDefineInfoPtr = std::shared_ptr< ProtoDefineInfo>;
+    struct MessageDefineInfo;
+    using MessageDefineInfoPtr = std::shared_ptr<MessageDefineInfo>;
 
     struct EnumerationDefineInfo;
     using EnumerationDefineInfoPtr = std::shared_ptr<EnumerationDefineInfo>;

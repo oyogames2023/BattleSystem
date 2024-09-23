@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package common;
+
+// 定义游戏中使用的通用类型
+enum ItemType {
+    UNKNOWN = 0;
+    WEAPON = 1;
+    ARMOR = 2;
+    CONSUMABLE = 3;
+}

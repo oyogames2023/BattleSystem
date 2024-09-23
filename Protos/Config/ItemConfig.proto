@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package config;
+
+import "item/item.proto";
+
+message Sheet1
+{
+	uint32 Id = 1; // 唯一id
+	string Name = 2; // 名称
+	map<uint32,uint32> ItemReward = 3; // 奖励道具列表
+	item.ItemReward BonusItemReward = 4; // 额外道具奖励
+}

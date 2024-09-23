@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Commom.h"
+#include "Common.h"
 #include "BattleConfig.h"
 
 #include "spdlog/spdlog.h"
@@ -157,6 +157,12 @@ namespace zeus
 		static std::string ToUpper(const std::string& str);
 
 		static std::string ToLower(const std::string& str);
+
+		static std::string TrimLeft(const std::string& str);
+
+		static std::string TrimRight(const std::string& str);
+
+		static std::string Trim(const std::string& str);
 	};
 
 } // namespace zeus

@@ -1,4 +1,4 @@
-#include "Commom.h"
+#include "Common.h"
 #include "FilesystemUtils.h"
 #include "ProtoUtils.h"
 
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	auto p1 = parser.GetProtoDefineInfo("combat.CombatEvent");
+	auto p1 = parser.GetMessageDefineInfo("combat.CombatEvent");
 	if (nullptr != p1)
 	{
 		

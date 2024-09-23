@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Commom.h"
+#include "Common.h"
 #include "Vector3.h"
 
 #define SAFE_INCREASE(var, increase, max) \

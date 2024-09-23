@@ -8,6 +8,9 @@
 #include <strstream>
 #include <fstream>
 #include <filesystem>
+#include <locale>
+#include <codecvt>
+#include <regex>
 
 #include <map>
 #include <vector>
@@ -15,6 +18,7 @@
 #include <deque>
 #include <list>
 #include <array>
+#include <queue>
 #include <unordered_map>
 #include <unordered_set>
 

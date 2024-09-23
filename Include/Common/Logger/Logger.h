@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Commom.h"
+#include "Common.h"
 #include "Singleton.h"
 #include "BattleConfig.h"
 #include "TimeUtils.h"

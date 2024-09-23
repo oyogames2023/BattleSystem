@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package common;
+
+// 定义游戏中的通用实体
+message Entity {
+    int32 id = 1;             // 实体的唯一标识符
+    string name = 2;          // 实体的名称
+    float x = 3;              // 实体在游戏世界中的x坐标
+    float y = 4;              // 实体在游戏世界中的y坐标
+    float z = 5;              // 实体在游戏世界中的z坐标
+}

@@ -31,11 +31,6 @@ namespace zeus
 
 	std::pair<std::string, std::string> FilesystemUtils::GetFilenameAndExtension(const fs::path& path)
 	{
-		if (!IsRegularFile(path))
-		{
-			return {};
-		}
-
 		std::string filename = path.stem().string();
 		std::string extension = path.extension().string();
 
@@ -82,6 +77,16 @@ namespace zeus
 				outputFileList[dirPath.string()] = fileList;
 			}
 		}
+	}
+
+	fs::path FilesystemUtils::GetParentDirectory(const fs::path& path)
+	{
+		if (path.empty() || !path.has_parent_path())
+		{
+			return {};
+		}
+
+		return path.parent_path();
 	}
 
 } // namespace zeus

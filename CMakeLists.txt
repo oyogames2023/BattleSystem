@@ -47,6 +47,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 	${CMAKE_SOURCE_DIR}/ThirdParty/xlnt-1.5.0/include
 	${CMAKE_SOURCE_DIR}/ThirdParty/zlib-1.3.1
 	${CMAKE_SOURCE_DIR}/ThirdParty/protobuf-28.0/src
+	${CMAKE_SOURCE_DIR}/Protos/CPlusPlus
     Include
     Include/Common
     Include/Common/Math
@@ -78,6 +79,8 @@ endif()
 if(BATTLE_EXPORTS)
     target_compile_definitions(${PROJECT_NAME} PUBLIC BATTLE_EXPORTS)
 endif()
+
+add_subdirectory(Protos/CPlusPlus)
 
 # 根据 BUILD_EXAMPLES 选项编译 Examples
 if(BUILD_EXAMPLES)
